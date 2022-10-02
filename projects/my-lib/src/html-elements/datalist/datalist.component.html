@@ -1,0 +1,12 @@
+<div class="form-floating">
+    <input class="form-control" placeholder=" " autocomplete="off" [(ngModel)]="Value" (focus)="onFocus()" #input />
+    <label>{{Placeholder}}</label>
+</div>
+<div class="datalist-ul" #items (scroll)="onScrollUl()">
+    <div *ngFor="let item of RealOptions; let i = index" (click)="onClicItem(item)">
+        <div class="my-container">
+            <div class="fw-bold fs-5">{{item.value}}</div>
+            <div class="fs-6">{{item.label}}</div>
+        </div>
+    </div>
+</div>
