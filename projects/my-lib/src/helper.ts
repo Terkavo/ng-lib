@@ -1,4 +1,6 @@
 // @ts-nocheck
+import { ClassConstructor, ClassTransformOptions, plainToInstance } from "class-transformer";
+
 export class Helper {
     static IsEventHasClass(event: Event, className: string): boolean {
         let targets = event.composedPath()
@@ -11,6 +13,28 @@ export class Helper {
                     return true
         }
         return false
+    }
+    static plainToInstance<V>(cls: ClassConstructor<any>, plain: V[] | V, options?: ClassTransformOptions): any {
+        let val = plainToInstance(cls, plain, options)
+        if (Array.isArray(val))
+            val.forEach(element => {
+                if (typeof element.ToClass !== "undefined")
+                    element.ToClass();
+            });
+        else
+            if (typeof val.ToClass !== "undefined")
+                val.ToClass();
+        return val
+    }
+    static RandomString(length: number): string {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() *
+                charactersLength));
+        }
+        return result;
     }
     static CreatePrototype() {
         Array.prototype.Remove = function (el: any) {
@@ -47,6 +71,11 @@ export class Helper {
                     continue
                 this.push(elementOtherArr)
             }
+        }
+        Array.prototype.PushArray = function (arr: any[]) {
+            arr.forEach(x => {
+                this.push(x)
+            })
         }
         Date.prototype.FormatDDMMYYYY = function () {
             let day: string | number = this.getDate()
