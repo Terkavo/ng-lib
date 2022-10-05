@@ -16,8 +16,4 @@ export class HeaderComponent implements OnInit {
       th.service.SetItem("")
     })
   }
-  click(){
-    debugger
-    this.service.EventsSubjectReboot.next()
-  }
 }
