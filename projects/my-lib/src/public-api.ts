@@ -1,3 +1,4 @@
+
 export { MyInputModule } from "./MyInputModule";
 
 export { Autosize } from './Directive/autosize.directive';
@@ -13,5 +14,6 @@ export { QrScannerComponent } from './html-elements/qr-scanner/qr-scanner.compon
 export { MyRourerLinkDirective } from "./Directive/my-rourer-link.directive";
 export { MyDataListInputEvent } from "./html-elements/datalist/datalist.component"
 export { DataListOptions } from "./html-elements/datalist/DataListOptions"
+export { MyTextareaComponent } from "./html-elements/my-textarea/my-textarea.component";
 export { Helper } from "./helper";
 //ng build my-lib --configuration development --watch

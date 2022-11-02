@@ -1,4 +1,4 @@
-<div class="form-floating">
+<div [ngClass]="{'form-floating':Placeholder!==''}">
     <input class="form-control" placeholder=" " autocomplete="off" [(ngModel)]="Value" (focus)="onFocus()" #input />
     <label>{{Placeholder}}</label>
 </div>

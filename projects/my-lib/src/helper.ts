@@ -48,6 +48,18 @@ export class Helper {
             this.splice(num, 1)
             return true;
         }
+        Array.prototype.RemoveAllElements = function (el: any) {
+            for (let index = this.length - 1; index >= 0; index--) {
+                if (this[index] === el)
+                    this.splice(index, 1)
+            }
+        }
+        Array.prototype.RemoveAll = function (fn: (x: any) => boolean) {
+            for (let index = this.length - 1; index >= 0; index--) {
+                if (fn(this[index]))
+                    this.splice(index, 1)
+            }
+        }
         Array.prototype.Exists = function (fn: (x: any) => boolean) {
             for (let index = 0; index < this.length; index++) {
                 const element = this[index];

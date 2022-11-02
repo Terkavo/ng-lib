@@ -25,6 +25,8 @@ export class MyInputNumberComponent implements OnInit {
     return this._Value.toString();
   }
   @Input() public set Value(value: string | number | null) {
+    if (typeof value === "string")
+      value = value.replace(",", '.')
     if (value === null || Number.isNaN(Number.parseInt(value.toString())))
       this._Value = 0;
     else {
@@ -46,6 +48,7 @@ export class MyInputNumberComponent implements OnInit {
       return
     this.InputEl.nativeElement.value = this._Value.toString();
     this.MyNgModelChange.emit(this._Value)
+    this.MyNgModelStringChange.emit(this._Value.toString())
   }
   @Input() public set Min(value: string | number) {
     this._Min = Number.parseFloat(value.toString());;
@@ -57,6 +60,13 @@ export class MyInputNumberComponent implements OnInit {
     this.Value = value
   }
   @Output() MyNgModelChange = new EventEmitter<number>();
+  @Input() public set MyNgModelString(value: string | undefined) {
+    if (value === undefined)
+      this.Value = 0;
+    else
+      this.Value = value
+  }
+  @Output() MyNgModelStringChange = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit(): void {

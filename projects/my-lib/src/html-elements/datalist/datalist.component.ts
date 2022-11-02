@@ -24,6 +24,11 @@ export class DatalistComponent implements OnInit, OnDestroy {
 
   //Output
   @Output("myInput") InputForOutput = new EventEmitter<MyDataListInputEvent>();
+
+  @Input() public set MyNgModel(value: string | null) {
+    this.Value = value
+  }
+  @Output() MyNgModelChange = new EventEmitter<string>();
   //html
   private readonly html: HTMLElement = <HTMLElement>document.querySelector("html");
   @ViewChild('items') el: ElementRef<HTMLElement>;
@@ -31,6 +36,8 @@ export class DatalistComponent implements OnInit, OnDestroy {
   //value
   private _Value: string = "";
   @Input() set Value(value: string | null) {
+    if (value === this._Value)
+      return
     if (value === null)
       this._Value = ""
     else
@@ -113,6 +120,7 @@ export class DatalistComponent implements OnInit, OnDestroy {
       isCompliance = true;
       label = opt.label;
     }
+    this.MyNgModelChange.emit(this._Value)
     this.InputForOutput.emit(new MyDataListInputEvent(this._Value, isCompliance, label))
   }
   onScrollUl() {
@@ -124,6 +132,7 @@ export class DatalistComponent implements OnInit, OnDestroy {
       this.RealOptions.push(this.CorrectOptions[this.RealOptions.length])
     }
   }
+  OldMyNgModelValue: string;
 }
 export class MyDataListInputEvent {
   constructor(public Value: string, public IsCorrect: boolean, public label: string | null) { }

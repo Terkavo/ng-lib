@@ -13,6 +13,7 @@ import { MyRadioArrayComponent } from './html-elements/my-radio/my-radio-array/m
 import { MyRadioComponent } from './html-elements/my-radio/my-radio.component';
 import { MyRourerLinkDirective } from './Directive/my-rourer-link.directive';
 import { MyInputNumberComponent } from './html-elements/my-input-number/my-input-number.component';
+import { MyTextareaComponent } from './html-elements/my-textarea/my-textarea.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MyInputNumberComponent } from './html-elements/my-input-number/my-input
     QrScannerComponent,
     MyInputNumberComponent,
     DatalistComponent,
+    MyTextareaComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +46,7 @@ import { MyInputNumberComponent } from './html-elements/my-input-number/my-input
     OneTwoDesignComponent,
     QrScannerComponent,
     MyInputNumberComponent,
+    MyTextareaComponent,
   ]
 })
 export class MyInputModule { }

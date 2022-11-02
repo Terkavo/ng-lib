@@ -30,15 +30,14 @@ export class Autosize implements AfterViewInit {
   }
 
   @HostListener('window:resize', ['$event.target'])
-  onResize(textArea: HTMLTextAreaElement) {
-    //Only apply adjustment if element width had changed.
+  onResize() {
     if (this.el.clientWidth === this._clientWidth) return;
     this._clientWidth = this.element.nativeElement.clientWidth;
     this.adjust();
   }
 
-  @HostListener('input', ['$event.target'])
-  onInput(textArea: HTMLTextAreaElement): void {
+  @HostListener('input')
+  onInput(): void {
     this.adjust();
   }
 
@@ -46,10 +45,12 @@ export class Autosize implements AfterViewInit {
     this.el = element.nativeElement;
     if (this.el.value !== "")
       this._clientWidth = this.el.clientWidth;
+      setTimeout(()=>{
+        this.adjust()
+      })
   }
 
   ngAfterViewInit(): void {
-    // set element resize allowed manually by user
     const style = window.getComputedStyle(this.el, null);
     if (style.resize === 'both') {
       this.el.style.resize = 'horizontal';
@@ -57,7 +58,6 @@ export class Autosize implements AfterViewInit {
     else if (style.resize === 'vertical') {
       this.el.style.resize = 'none';
     }
-    // run first adjust
     this.adjust();
   }
 
@@ -69,13 +69,10 @@ export class Autosize implements AfterViewInit {
   }
 
   updateMinHeight(): void {
-    // Set textarea min height if input defined
     this.el.style.minHeight = this._minHeight;
   }
 
   updateMaxHeight(): void {
-    // Set textarea max height if input defined
     this.el.style.maxHeight = this._maxHeight;
   }
-
 }
